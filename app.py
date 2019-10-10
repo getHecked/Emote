@@ -39,9 +39,10 @@ def upload_form():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         # qr = qrcode.make(url_for(return_file, filename=filename))
         flash('File successfully uploaded')
-        qr = qrcode.make(str(request.base_url) + '/download/' + filename) 
-        qr.save(f'./static/qrcodes/qr_code.png', quality=70)   
-        return redirect(url_for('display_qr'))
+        qr = qrcode.make(str(request.host_url) + 'download/' + filename) 
+        qr_filename = filename.replace('.', '')
+        qr.save(f'./static/qrcodes/{qr_filename}_qr_code.png', quality=70)   
+        return redirect(url_for('display_qr', filename = filename, qr_filename = qr_filename))
     else:
         flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
         return redirect(request.url)
@@ -52,9 +53,9 @@ def return_file(filename):
     return send_from_directory(directory='./uploads', filename=filename, as_attachment=True)
 
 
-@app.route('/download/display_qr', methods = ['GET'])
-def display_qr():
-    return render_template('qr_display.html')
+@app.route('/download/display_qr/<filename>/<qr_filename>', methods = ['GET'])
+def display_qr(filename, qr_filename):
+    return render_template('qr_display.html', qr_path=f'/static/qrcodes/{qr_filename}_qr_code.png', download_url = str(request.host_url) + 'download/' + filename)
 
 
 if __name__ == "__main__":
