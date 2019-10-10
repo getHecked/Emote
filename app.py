@@ -40,7 +40,7 @@ def upload_form():
         # qr = qrcode.make(url_for(return_file, filename=filename))
         flash('File successfully uploaded')
         qr = qrcode.make(str(request.base_url) + '/download/' + filename) 
-        qr.save(f'./static/{filename}_qr_code.png', quality=70)   
+        qr.save(f'./static/qrcodes/qr_code.png', quality=70)   
         return redirect(url_for('display_qr'))
     else:
         flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
