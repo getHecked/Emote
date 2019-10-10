@@ -1,14 +1,22 @@
 <!doctype html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
 <title>Python Flask File Upload Example</title>
-<h2>Select a file to upload</h2>
+<body class="text-center">
+	
 
-<form method="post" action="/" enctype="multipart/form-data">
-    <dl>
+	<h2>Select a file to upload</h2>
+	<br>
+	<form method="post" action="/" enctype="multipart/form-data">
+		<dl>
+			<p>
+				<input type="file" name="file" autocomplete="off" required>
+			</p>
+		</dl>
+		<br>
 		<p>
-			<input type="file" name="file" autocomplete="off" required>
+			<input type="submit" value="Submit">
 		</p>
-    </dl>
-    <p>
-		<input type="submit" value="Submit">
-	</p>
-</form>
+	</form>
+</body>
